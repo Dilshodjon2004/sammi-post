@@ -9,11 +9,15 @@ class PostService {
       picture: fileName,
       author,
     });
+    // const newPost = await postModel.create({
+    //   ...post,
+    //   picture: fileName,
+    // });
     return newPost;
   }
 
   async getAll() {
-    const allPosts = await postModel.find().populate("author");;
+    const allPosts = await postModel.find().populate("author");
     return allPosts;
   }
 

@@ -13,7 +13,7 @@ class MailService {
     });
   }
 
-  async sendMail(email, activationLink) {
+  async sendActivationMail(email, activationLink) {
     await this.transporter.sendMail({
       from: process.env.SMTP_USER,
       to: email,
@@ -22,6 +22,22 @@ class MailService {
         <div>
           <h1>For account activation follow this link:</h1>
           <a href="${activationLink}">${activationLink}</a>
+        </div>
+        `,
+    });
+  }
+
+  async sendForgotPasswordMail(email, activationLink) {
+    await this.transporter.sendMail({
+      from: process.env.SMTP_USER,
+      to: email,
+      subject: `Forgot password. This link will help you to recover your account.`,
+      html: `
+        <div>
+          <h1>To recover your account just click the link below:</h1>
+          <a href="${activationLink}">Click to reset your password</a>
+
+          <b>This link will be valid during only in 15 minutes.</b>
         </div>
         `,
     });
